@@ -1,0 +1,11 @@
+{
+  "name": "fmcapi",
+  "version": "1.0.0",
+  "description": "Cisco FMC API Client",
+  "main": "apiclient.js",
+  "scripts": {
+    "start": "node ./apiclient.js"
+  },
+  "author": "Robert Craig",
+  "license": "ISC"
+}
