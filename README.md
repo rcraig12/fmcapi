@@ -1,10 +1,10 @@
-# FMC API Client 
+# FMC Client 
 
-Package for connecting to a Cisco FMC and managing it using the API endpoints it has available.
+Package for connecting to a Cisco Firepower Management Console and managing it using the API endpoints that it has available.
 
 ## Installation
 
-`npm install fmcapi --save`
+`npm install fmcclient --save`
 
 ## Description
 
@@ -21,7 +21,7 @@ FMC_PASS=_password_
 Inside a nodejs express application I am using a MVC approach and the controller simply needs the following in order to kick off the client.
 
 ```
-const fmcclient = require('../fmcclient');
+const fmcclient = require('fmcclient');
 
 fmcclient.CheckAuth();
 ```
