@@ -16,6 +16,16 @@ FMC_USER=_username_
 FMC_PASS=_password_
 ```
 
+### example so far
+
+Inside a nodejs express application I am using a MVC approach and the controller simply needs the following in order to kick off the client.
+
+```
+const fmcclient = require('../fmcclient');
+
+fmcclient.CheckAuth();
+```
+
 Please consult the cisco documentation for how to create an API user account on the Firepower Managment Console.
 
 - [x] Write the authentication loop
