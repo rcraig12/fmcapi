@@ -1,22 +1,23 @@
+require('dotenv').config();
 global.fetch = require('node-fetch');
 process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
 
 var preferences = {};
 
-const Connect = (options) => {
+const Connect = ( options ) => {
 
     // Check options
 
-    if (!options.host){
-        console.log('[FMCAPI: No host defined.');
+    if ( !options.host ){
+        console.log( '[FMCAPI: No host defined.' );
     }
 
-    if (!options.user){
-        console.log('[FMCAPI: No user defined.');
+    if ( !options.user ){
+        console.log( '[FMCAPI: No user defined.' );
     }
 
-    if (!options.pass){
-        console.log('[FMCAPI: No password defined.');
+    if ( !options.pass ){
+        console.log( '[FMCAPI: No password defined.' );
     }
 
     preferences = options;
