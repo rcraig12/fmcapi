@@ -30,9 +30,9 @@ const Connect = (options) => {
 const GenerateToken = async() => {
 
     authorizationValue = 'Basic ';
-    authorizationValue += Buffer.from(preferences.user + ':' + preferences.pass, 'ascii').toString('base64');
+    authorizationValue += Buffer.from( preferences.user + ':' + preferences.pass, 'ascii' ).toString('base64');
 
-    await fetch('https://' + preferences.host + '/api/fmc_platform/v1/auth/generatetoken', {
+    await fetch( 'https://' + preferences.host + '/api/fmc_platform/v1/auth/generatetoken', {
 
         method: 'POST',
         headers: {
@@ -50,19 +50,19 @@ const GenerateToken = async() => {
             preferences.LoggedIn = true;
             preferences.headers = response.headers;
 
-            console.log('[FMCClient] : Successfully logged in and recieved a X-auth-access-token');
+            console.log( '[FMCClient] : Successfully logged in and recieved a X-auth-access-token' );
 
         }
 
         if ( response.status === 500 ){
 
-            console.log('[FMCClient] : Problem with authentication. Status code 500');
+            console.log( '[FMCClient] : Problem with authentication. Status code 500' );
 
         }
 
     }).catch( error => {
 
-        console.log('[FMCClient] : ' + error.message );
+        console.log( '[FMCClient] : ' + error.message );
 
     });
 
@@ -70,7 +70,7 @@ const GenerateToken = async() => {
 
 const RefreshToken = async() => {
     
-    await fetch('https://' + preferences.host + '/api/fmc_platform/v1/auth/refreshtoken', {
+    await fetch( 'https://' + preferences.host + '/api/fmc_platform/v1/auth/refreshtoken', {
 
         method: 'POST',
         headers: preferences.headers
@@ -83,7 +83,7 @@ const RefreshToken = async() => {
             preferences.TimeStamp = Math.floor( Date.now() / 1000 );
             preferences.TokenRefresh++;
 
-            console.log('[FMCClient] : Successfully refreshed the authentication tokens ' + preferences.TokenRefresh + ' times.');
+            console.log( '[FMCClient] : Successfully refreshed the authentication tokens ' + preferences.TokenRefresh + ' times.' );
 
         }
 
@@ -95,7 +95,7 @@ const RefreshToken = async() => {
 
     }).catch( error => {
 
-        console.log('[FMCClient] : ' + error.message );
+        console.log( '[FMCClient] : ' + error.message );
 
     });
 
@@ -105,7 +105,7 @@ const CheckAuth = () => {
 
     if ( preferences.LoggedIn === false || preferences.LoggedIn === undefined ){
 
-        console.log('[FMCClient] : Not logged in - Authenticating now');
+        console.log( '[FMCClient] : Not logged in - Authenticating now' );
         
         Connect({
             user: process.env.FMC_USER,
@@ -120,26 +120,25 @@ const CheckAuth = () => {
         var timeNow = Math.floor( Date.now() / 1000 );
         var secondsSinceLastRefresh = timeNow - preferences.TimeStamp;
 
-        console.log('[FMCClient] : ' + secondsSinceLastRefresh + ' seconds since last timestamp.');
+        console.log( '[FMCClient] : ' + secondsSinceLastRefresh + ' seconds since last timestamp.' );
 
         if ( secondsSinceLastRefresh > 1800 && preferences.TokenRefresh <= 3 ) {
 
             if ( preferences.TokenRefresh > 2 ){
 
-                console.log('[FMCClient] : Token expired and there have been more than 3 refreshes so generating a new token.');
+                console.log( '[FMCClient] : Token expired and there have been more than 3 refreshes so generating a new token.' );
                 GenerateToken()
  
             } else {
 
-                console.log('[FMCClient] : Token expired refreshing now.');
+                console.log( '[FMCClient] : Token expired refreshing now.' );
                 RefreshToken();
 
             }
             
-
         } else {
 
-            console.log('[FMCClient] : Token is still valid as the timer is under 1800 seconds');
+            console.log( '[FMCClient] : Token is still valid as the timer is under 1800 seconds' );
 
         }
 
@@ -148,7 +147,6 @@ const CheckAuth = () => {
     return preferences;
 
 }
-
 
 module.exports = {
     CheckAuth
